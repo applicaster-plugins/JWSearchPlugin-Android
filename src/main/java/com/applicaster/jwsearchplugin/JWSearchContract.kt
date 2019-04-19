@@ -9,6 +9,7 @@ import com.applicaster.plugin_manager.screen.PluginScreen
 import com.applicaster.util.StringUtil
 import com.google.gson.internal.LinkedTreeMap
 import java.io.Serializable
+import java.net.URL
 import java.util.*
 
 class JWSearchContract : PluginScreen {
@@ -23,7 +24,11 @@ class JWSearchContract : PluginScreen {
                 StringUtil.isEmpty(params[Constants.PARAM_PAGE_LIMIT].toString()))
             return false
 
-        PluginConfiguration.setPluginConfigs(params[Constants.PARAM_PLAYLIST_URL].toString(), params[Constants.PARAM_PAGE_LIMIT].toString())
+        val url = URL(params[Constants.PARAM_PLAYLIST_URL].toString())
+
+        val baseURL = url.protocol + "://" + url.host
+
+        PluginConfiguration.setPluginConfigs(baseURL, url.path, params[Constants.PARAM_PAGE_LIMIT].toString())
 
         return true
     }

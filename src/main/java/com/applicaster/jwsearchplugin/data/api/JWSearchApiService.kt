@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -17,8 +18,8 @@ import retrofit2.http.Query
  */
 interface JWSearchApiService {
 
-    @GET("v2/playlists/FM3Qaz1y")
-    fun search(@Query("search") searchTerm: String,
+    @GET("{playlist}")
+    fun search(@Path("playlist") queryPath: String, @Query("search") searchTerm: String,
                @Query("page_limit") pageLimit: String, @Query("page_offset") pageOffset: String):
             Observable<SearchResult>
 
@@ -32,7 +33,7 @@ interface JWSearchApiService {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
-                    .baseUrl("http://video.allhealthtv.com/")
+                    .baseUrl(PluginConfiguration.baseUrl + "/")
                     .build()
 
             return retrofit.create(JWSearchApiService::class.java)

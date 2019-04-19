@@ -15,7 +15,7 @@ class SearchInteractor : Interactor() {
 
     fun search(onFinishedListener: OnFinishedListener, searchTerm: String, pageOffset: String) {
 
-        disposable = jwSearchApiService.search(searchTerm, PluginConfiguration.itemLimit, pageOffset)
+        disposable = jwSearchApiService.search(PluginConfiguration.path, searchTerm, PluginConfiguration.itemLimit, pageOffset)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

@@ -1,11 +1,13 @@
 package com.applicaster.jwsearchplugin.plugin
 
 object PluginConfiguration {
-    lateinit var playlistURL: String
+    lateinit var baseUrl: String
+    lateinit var path: String
     lateinit var itemLimit: String
 
-    fun setPluginConfigs(url: String, limit: String) {
-        playlistURL = url
+    fun setPluginConfigs(host: String, urlPath: String, limit: String) {
+        baseUrl = host
+        path = urlPath
         itemLimit = limit
     }
 }

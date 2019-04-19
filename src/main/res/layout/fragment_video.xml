@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<com.applicaster.util.ui.APRoundedCornerRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:applicaster="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    applicaster:corner_radius="14dp">
+
+    <com.applicaster.util.ui.aspectratio.views.APAspectRatioImageView
+        android:id="@+id/item_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        applicaster:anchor_type="width"
+        applicaster:aspect_ratio="1.777"
+        android:src="@drawable/ic_placeholder"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/item_image"
+        android:layout_alignEnd="@id/item_image"
+        android:layout_alignStart="@id/item_image"
+        android:layout_alignTop="@id/item_image"
+        android:background="@drawable/bottom_gradient"/>
+
+    <ImageView
+        android:id="@+id/item_play_button"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        android:src="@drawable/ic_play"/>
 
     <TextView
-        android:id="@+id/item_number"
+        android:id="@+id/item_primary_text"
         android:layout_width="wrap_content"
+        android:layout_margin="15dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+        android:layout_alignBottom="@id/item_image"
+        android:maxLines="2"
+        android:textColor="#ffffff"/>
+</com.applicaster.util.ui.APRoundedCornerRelativeLayout>
