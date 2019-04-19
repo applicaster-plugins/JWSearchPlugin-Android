@@ -32,11 +32,13 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
+            android:textCursorDrawable="@color/black"
             android:background="@null" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/tag_textview"
+        style="@style/L1FullImagePrimaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
