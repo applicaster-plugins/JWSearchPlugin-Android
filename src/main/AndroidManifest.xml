@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.applicaster.copaamerica.statsscreenplugin">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:label="${app_name}"
+        android:allowBackup="false"
+        android:supportsRtl="false">
+        <activity
+            android:name=".CopaAmericaStatsActivity"
+            android:configChanges="orientation|screenSize"/>
+    </application>
+</manifest>
