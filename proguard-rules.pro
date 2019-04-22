@@ -3,7 +3,7 @@
    public <methods>;
 }
 
--keep public class com.applicaster.jwsearchplugin.PluginConfigurationHandler {
+-keep public class com.applicaster.jwsearchplugin.plugin.PluginConfiguration {
    public <fields>;
    public <methods>;
 }
@@ -14,8 +14,5 @@
 -keep class com.squareup.retrofit2.** {*;}
 -keep interface com.squareup.retrofit2.** {*;}
 
--keep class com.applicaster.copaamerica.statsscreenplugin.data.model.** {*;}
-
--keep class com.ethanhua.skeleton.** {*;}
--keep class io.supercharge.shimmerlayout.** {*;}
--keep class com.squareup.picasso.** {*;}
+-keep class com.applicaster.jwsearchplugin.data.model.** {*;}
+-keep class com.applicaster.jwsearchplugin.plugin.** {*;}
