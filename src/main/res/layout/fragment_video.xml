@@ -14,15 +14,6 @@
         applicaster:aspect_ratio="1.777"
         android:src="@drawable/ic_placeholder"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@id/item_image"
-        android:layout_alignEnd="@id/item_image"
-        android:layout_alignStart="@id/item_image"
-        android:layout_alignTop="@id/item_image"
-        android:background="@drawable/bottom_gradient"/>
-
     <ImageView
         android:id="@+id/item_play_button"
         android:layout_width="63dp"
@@ -34,10 +25,11 @@
     <TextView
         android:id="@+id/item_primary_text"
         style="@style/L1FullImagePrimaryText"
-        android:layout_width="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:padding="15dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/item_image"
         android:maxLines="2"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        android:background="#8C000000"/>
 </com.applicaster.util.ui.APRoundedCornerRelativeLayout>

@@ -24,6 +24,7 @@ import com.applicaster.jwsearchplugin.plugin.PluginConfiguration
 import com.applicaster.model.APVodItem
 import com.applicaster.plugin_manager.playersmanager.PlayableConfiguration
 import com.applicaster.plugin_manager.playersmanager.internal.PlayersManager
+import com.applicaster.util.OSUtil
 import kotlinx.android.synthetic.main.fragment_video_list.*
 
 
@@ -37,7 +38,6 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
     private lateinit var searchPresenter: SearchPresenter
     private lateinit var adapter: VideoRecyclerViewAdapter
 
-    private var listener: OnListFragmentInteractionListener? = null
     private var videos = mutableListOf<Playlist>()
     private var isLoading = false
     private var isLastPage = false
@@ -55,7 +55,7 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
         adapter = VideoRecyclerViewAdapter(context!!, videos, this)
 
         list.adapter = adapter
-        list.addItemDecoration(MarginItemDecoration(45))
+        list.addItemDecoration(MarginItemDecoration(OSUtil.convertDPToPixels(8)))
         videos = emptyList<Playlist>().toMutableList()
 
         search_edit_text.setOnEditorActionListener(object : TextView.OnEditorActionListener {
@@ -88,7 +88,9 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
         list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                view.hideKeyboard()
+                if (dy > 15) {
+                    view.hideKeyboard()
+                }
                 val layoutManager = recyclerView?.layoutManager as LinearLayoutManager
                 val visibleItemCount = layoutManager.childCount
                 val totalItemCount = layoutManager.itemCount
@@ -111,7 +113,6 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
     }
 
     private fun clearSearch() {
-        tag_textview.visibility = View.VISIBLE
         adapter.clearItems()
     }
 
@@ -130,7 +131,6 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
         if (searchResult.playlist.size < PluginConfiguration.itemLimit.toInt()) {
             isLastPage = true
         }
-        tag_textview.visibility = View.GONE
         adapter.updateItems(searchResult.playlist)
     }
 
