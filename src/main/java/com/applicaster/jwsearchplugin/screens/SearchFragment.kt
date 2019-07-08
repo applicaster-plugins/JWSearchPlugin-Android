@@ -17,6 +17,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
+import com.applicaster.atom.model.APAtomEntry
 import com.applicaster.copaamerica.statsscreenplugin.R
 import com.applicaster.jwsearchplugin.data.model.Playlist
 import com.applicaster.jwsearchplugin.data.model.SearchResult
@@ -117,9 +118,27 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
     }
 
     override fun playFullScreenVideo(video: Playlist) {
-        var vod = APVodItem(video.mediaid, video.title, null)
-        vod.description = video.description
-        vod.stream_url = video.sources.first().file
+        var entry = APAtomEntry()
+        entry.id = video.mediaid
+        entry.title = video.title
+        entry.summary = video.description
+        entry.content = APAtomEntry.Content()
+        entry.content.src = video.sources.first().file
+        var sideCarCaptions = listOf<Map<String,String>>().toMutableList()
+        var extensions = mapOf<String, Any>().toMutableMap()
+        video.tracks.forEach { track ->
+            if (track.kind.equals("captions", true)) {
+                sideCarCaptions.add(mapOf("src" to track.file, "label" to track.label))
+            } else if (track.kind.equals("thumbnails", true)) {
+                extensions["thumbnails"] = track.file
+            }
+        }
+        extensions["sideCarCaptions"] = sideCarCaptions
+        entry.extensions = extensions
+
+        var vod = APAtomEntry.APAtomEntryPlayable(entry)
+        vod.setContentVideoUrl(video.sources.first().file)
+        vod.isFree = video.isFree.toBoolean()
 
         val playersManager = PlayersManager.getInstance()
         val playerContract = playersManager.createPlayer(vod, context)
