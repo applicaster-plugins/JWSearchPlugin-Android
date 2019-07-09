@@ -7,6 +7,8 @@ data class Playlist(
         val description: String,
         @SerializedName("duration")
         val duration: Int,
+        @SerializedName("isFree")
+        val isFree: String,
         @SerializedName("feedid")
         val feedid: String,
         @SerializedName("image")
