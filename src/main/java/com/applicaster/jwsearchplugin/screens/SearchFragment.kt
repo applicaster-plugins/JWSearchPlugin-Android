@@ -118,14 +118,14 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
     }
 
     override fun playFullScreenVideo(video: Playlist) {
-        var entry = APAtomEntry()
+        val entry = APAtomEntry()
         entry.id = video.mediaid
         entry.title = video.title
         entry.summary = video.description
         entry.content = APAtomEntry.Content()
         entry.content.src = video.sources.first().file
-        var sideCarCaptions = listOf<Map<String,String>>().toMutableList()
-        var extensions = mapOf<String, Any>().toMutableMap()
+        val sideCarCaptions = listOf<Map<String,String>>().toMutableList()
+        val extensions = mapOf<String, Any>().toMutableMap()
         video.tracks.forEach { track ->
             if (track.kind.equals("captions", true)) {
                 sideCarCaptions.add(mapOf("src" to track.file, "label" to track.label))
@@ -136,7 +136,7 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
         extensions["sideCarCaptions"] = sideCarCaptions
         entry.extensions = extensions
 
-        var vod = APAtomEntry.APAtomEntryPlayable(entry)
+        val vod = APAtomEntry.APAtomEntryPlayable(entry)
         vod.setContentVideoUrl(video.sources.first().file)
         vod.isFree = video.isFree.toBoolean()
 
