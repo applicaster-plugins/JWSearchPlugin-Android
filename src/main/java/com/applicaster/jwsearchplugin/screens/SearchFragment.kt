@@ -22,7 +22,6 @@ import com.applicaster.copaamerica.statsscreenplugin.R
 import com.applicaster.jwsearchplugin.data.model.Playlist
 import com.applicaster.jwsearchplugin.data.model.SearchResult
 import com.applicaster.jwsearchplugin.plugin.PluginConfiguration
-import com.applicaster.model.APVodItem
 import com.applicaster.plugin_manager.playersmanager.PlayableConfiguration
 import com.applicaster.plugin_manager.playersmanager.internal.PlayersManager
 import com.applicaster.util.OSUtil
@@ -124,7 +123,7 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
         entry.summary = video.description
         entry.content = APAtomEntry.Content()
         entry.content.src = video.sources.first().file
-        val sideCarCaptions = listOf<Map<String,String>>().toMutableList()
+        val sideCarCaptions = listOf<Map<String, String>>().toMutableList()
         val extensions = mapOf<String, Any>().toMutableMap()
         video.tracks.forEach { track ->
             if (track.kind.equals("captions", true)) {
@@ -138,7 +137,8 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
 
         val vod = APAtomEntry.APAtomEntryPlayable(entry)
         vod.setContentVideoUrl(video.sources.first().file)
-        vod.isFree = video.isFree.toBoolean()
+        vod.isFree = true
+//        vod.isFree = video.isFree.toBoolean()
 
         val playersManager = PlayersManager.getInstance()
         val playerContract = playersManager.createPlayer(vod, context)
