@@ -137,8 +137,7 @@ class SearchFragment : Fragment(), com.applicaster.jwsearchplugin.screens.base.V
 
         val vod = APAtomEntry.APAtomEntryPlayable(entry)
         vod.setContentVideoUrl(video.sources.first().file)
-        vod.isFree = true
-//        vod.isFree = video.isFree.toBoolean()
+        vod.isFree = video.isFree.toBoolean()
 
         val playersManager = PlayersManager.getInstance()
         val playerContract = playersManager.createPlayer(vod, context)
